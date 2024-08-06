@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+## My first react project
+***
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+>React — это инструмент для создания пользовательских интерфейсов. Его главная задача — обеспечение вывода на экран того, что можно видеть на веб-страницах.
 
-## Available Scripts
+В данном проекте я делала перенос готовой верстки на React.
+Верстка представляла собой небольшой сайт-порфтолио с тремя страницами и базовыми блоками.
 
-In the project directory, you can run:
+***Главная задача*** - создать отдельные компонены с кодом, которые подключались бы между собой и при необходимости могли использоваться в других проектах. 
+>Благодаря разбиению каждой страницы на небольшие фрагменты react значительно облегчает создание интерфейсов.
 
-### `npm start`
+Список проектов в порфолио был описан в виде массива и находится в ***projectsList.js.***
+Каждый проект описывается в виде объекта (свойство: значение). Далее на основе массива ***projects*** нужно вывести компоненты для каждого проекта, используя данные из созданного массива.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Для этого использовался метод ***map().*** Он выполняет действия к каждому элементу массива и по итогу возвращает новый массив, т.е. обрабатывает содержимое массива. В данном случае метод возвращает ***JSX-разметку.***
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+***Вторая задача*** - передавать данные в компонент. Это можно сделать с помощью свойств (props). Эти свойства мы можем создавать самостоятельно.
 
-### `npm test`
+Мы можем передавать несколько свойств при вызове компонента и потом использовать их внутри этого компонента, выводить их в месте необходимости.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Здесь я познакомилась с понятием деструктуризации.
 
-### `npm run build`
+>***Деструктуризация*** — это свойство JavaScript, которое используется для извлечения частей данных из массива или объектов и назначения их новым переменным, созданным разработчиком.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+При работе с массивом объектов в React необходимо использовать уникальный ключ.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+В нашей ситуации с массивом из проектов - Если данные какого-то проекта изменятся, то React запомнит ключ, где произошло изменение и обновит только эту карточку, а не всю страницу. Мы используем map(), поэтому в качестве ключа допустимо ипользовать индекс.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+В иных случаях индекс не желательно использовать, так как он является не постоянным идентификатором. В идеале - отдельно прописывать id.
 
-### `npm run eject`
+>В данном проекте я взяла за правильно выносить все, что можно в отдельный компонент.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Чтобы ссылки открывали в новом окне, необходимо использовать ***target="blank"***
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Перемещение по страницам
+Для реализации перемещения по страницам в React нужно использовать пакет ***react-router-dom.*** Логично, что для использования роутера его для начала нужно подключить.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Роутинг:
+1. Ссылки на другие страницы.
+2. Подмены страниц.
+3. Перемещение по страницам.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Routes - это сами маршруты. Определяются через компонент ***Route***
 
-## Learn More
+При перемещении возникла проблема с прокручиванием скролла. Она была решена готовым решением из документации React.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Для отдельных проектов были сделаны отдельные страницы и маршруты. Тут имеется в виду страница с содержанием всех проектов и клики по ним. По клику переходим на отдельную страницу конкретного проекта.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> Заметка: В return находится JSX разметка, которая рендерится. Функции и константы описываются выше.
 
-### Code Splitting
+### Кнопка переключения темы
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Работа с кнопкой подразумевала следующее:
+1. При нажатии на кнопку меняются стили.
+2. При установлии стиля и открытии страницы в новом окне стиль должен быть как и на текущей странице. Нужно использовать LocalStorage.
+3. По-умолчанию тема страницы должна быть такая же, как и тема и пользователя в системных настройках на ПК (настройки системы пользователя).
 
-### Analyzing the Bundle Size
+Необходимо было связать ***LocalStorage*** и состояние(темы). Для этого надо использовать кастомные хуки.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+>Можно создавать собственные хуки, т.е. собственные функции, которые будут использовать хуки react, как бы дополняя их нужным нам функционалом.
 
-### Making a Progressive Web App
+### Компонент BtnDarkMode отвечает за темную тему сайта
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Тспользовались хуки react useEffect и useRef.
+2. Использовались кастомные хуки useLocalStorage.
+3. В BtnRef завели ссылку на кнопку, чтобы к ней обращаться.
+4. В рендере кнопки используем ***onClick()*** и указываем, что по клику сработает ***toggleDarkMode()*** -> который обращается к состоянию ***setDarkMode*** и меняет тему.
+5. Использовали хуки: 
+   useEffect срабатывает на старке и при любом изменении темы.
+   useEffect срабатывает только при старте и вешает прослушку на системные настройки.
